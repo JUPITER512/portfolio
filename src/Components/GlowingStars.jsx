@@ -29,7 +29,7 @@ const StarBackground = (props) => {
             >
                 <PointMaterial
                     transparent
-                    color="$fff"
+                    color="#ffffff"
                     size={0.002}
                     sizeAttenuation={true}
                     dethWrite={false}
@@ -40,8 +40,8 @@ const StarBackground = (props) => {
 };
 
 const StarsCanvas = () => (
-    <div className="w-full h-auto fixed inset-0 z-[20] blur-[2px] ">
-        <Canvas camera={{ position: [0, 100, 100] }}>
+    <div className="w-full h-auto fixed inset-0 z-[20] blur-[1px] ">
+        <Canvas camera={{ position: [0, 0, 1] }}>
             <Suspense fallback={null}>
                 <StarBackground />
             </Suspense>
