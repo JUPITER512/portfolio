@@ -11,7 +11,27 @@ export default {
   ],
   darkMode:"class",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        OpenSans: ["Open Sans"]
+      },
+      keyframes: {
+        'infinite-scroll-rtl': {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        'infinite-scroll-ltr': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+      },
+      animation: {
+        'infinite-scroll-rtl': 'infinite-scroll-rtl 20s linear infinite',
+        'infinite-scroll-ltr': 'infinite-scroll-ltr 20s linear infinite',
+
+      },
+    },
+
   },
   plugins: [
     addVariablesForColors,

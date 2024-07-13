@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 const ThemeSwitcher = () => {
     const [theme, setTheme] = useState(localStorage.getItem('portfolioTheme') || 'dark');
-
+    
     function handleThemeToggle() {
         setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
     }
@@ -20,9 +20,9 @@ const ThemeSwitcher = () => {
         SwitcherComponent: (
             <button
                 onClick={handleThemeToggle}
-                className="z-[10000000] h-14 w-14 rounded-full bg-slate-400 dark:bg-gray-400 absolute right-5 top-2"
+                className="z-[10000000] h-14  w-14 rounded-full absolute right-5 top-2 text-white"
             >
-                {theme === 'dark' ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />}
+                {theme === 'dark' ? <FontAwesomeIcon icon={faSun}  /> : <FontAwesomeIcon icon={faMoon} />}
             </button>
         ),
     };
