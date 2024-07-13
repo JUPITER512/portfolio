@@ -1,51 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBackward, faHome, faTools, faProjectDiagram, faEnvelope, faForward, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faForward, faHome, faTools, faProjectDiagram, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = () => {
-    const [toggle, setToggle] = useState(true);
+    const [toggle, setToggle] = useState(false);
 
-    function handleSidebarexpand() {
+    const handleSidebarexpand = () => {
         setToggle(!toggle);
-    }
+    };
 
+    const menuItems = [
+        { icon: faHome, label: "Home" ,link:"home" },
+        { icon: faTools, label: "Skills", link: "home" },
+        { icon: faProjectDiagram, label: "Previous Projects", link: "home" },
+        { icon: faEnvelope, label: "Contact me", link: "home" }
+    ];
 
     return (
         <div
-            className={`z-[999] px-4 py-4 rounded-lg  border-2 absolute top-[50%] transform translate-y-[-50%] transition-all ease-in-out duration-300  bg-gray-900 border-gray-700 text-white  dark:bg-gray-100 dark:border-gray-300 ${toggle ? "left-0 w-48" : "left-0 w-16"
-                }  dark:shadow-white shadow-sm`}
-        > 
-            <button onClick={handleSidebarexpand}>
-                {toggle ? (
-                    <FontAwesomeIcon
-                        icon={faBackward}
-                        className="absolute top-5 right-4  dark:text-gray-900 text-gray-100"
-                    />
-                ) : (
-                    <FontAwesomeIcon
-                        icon={faForward}
-                            className="absolute top-5 right-4  dark:text-gray-900 text-gray-100"
-                    />
-                )}
+            className={`z-[999] px-4 py-4 rounded-lg fixed bottom-4 md:top-[50%] md:transform md:translate-y-[-50%] border-2 transition-all ease-in-out duration-300 bg-gray-900 border-gray-700 text-white dark:bg-gray-100 dark:border-gray-300 ${toggle ? "left-0 md:w-48" : "left-0 md:w-16"
+                } dark:shadow-white shadow-sm backdrop-blur-lg bg-transparent w-[90%] left-[5%] md:left-4`}
+        >
+            <button
+                onClick={handleSidebarexpand}
+                className="hidden md:block focus:outline-none"
+            >
+                <FontAwesomeIcon
+                    icon={toggle ? faBackward : faForward}
+                    className="absolute top-5 right-4 dark:text-gray-900 text-gray-100"
+                />
             </button>
-           
-            <ul className="flex items-center flex-col justify-center gap-4 mt-8">
-                <li className="flex items-center dark:text-gray-900 text-gray-100">
-                    <FontAwesomeIcon icon={faHome} />
-                    {toggle && <span className="ml-2">Home</span>}
-                </li>
-                <li className="flex items-center dark:text-gray-900 text-gray-100">
-                    <FontAwesomeIcon icon={faTools} />
-                    {toggle && <span className="ml-2">Skills</span>}
-                </li>
-                <li className="flex items-center dark:text-gray-900 text-gray-100">
-                    <FontAwesomeIcon icon={faProjectDiagram} />
-                    {toggle && <span className="ml-2">Previous Projects</span>}
-                </li>
-                <li className="flex items-center dark:text-gray-900 text-gray-100">
-                    <FontAwesomeIcon icon={faEnvelope} />
-                    {toggle && <span className="ml-2">Contact me</span>}
-                </li>
+
+            <ul className="flex items-center flex-row md:flex-col justify-center gap-14 md:gap-10 md:mt-24 ">
+                {menuItems.map((item, index) => (
+                    <li key={index} className="flex items-center dark:text-gray-900 text-gray-100" role="menuitem">
+                        <FontAwesomeIcon icon={item.icon} />
+                        {toggle && <span className="ml-2">{item.label}</span>}
+                    </li>
+                ))}
             </ul>
         </div>
     );

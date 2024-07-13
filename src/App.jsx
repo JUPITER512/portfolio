@@ -24,11 +24,15 @@ const router = createBrowserRouter([
 
 const App = () => {
   const [toggle, setToggle] = useState(false)
+  const [zoomOut, setZoomOut] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setToggle(true)
-    }, 4500)
+      setZoomOut(true)
+      setTimeout(() => {
+        setToggle(true)
+      }, 200) 
+    }, 3400)
     return () => clearTimeout(timer)
   }, [])
 
@@ -37,8 +41,8 @@ const App = () => {
       {toggle ? (
         <RouterProvider router={router} />
       ) : (
-        <LampContainer className="absolute top-0">
-          <TextGenerateEffect words={'< H E L L O W O R L D / > FROM ALI'} className={'text-white text-center justify-center'} />
+        <LampContainer className={`absolute top-0 transition-transform duration-1000 ${zoomOut ? 'scale-0' : 'scale-100'}`}>
+          <TextGenerateEffect words={'< H E L L O W O R L D / > FROM ALI'}  className={'text-white text-center justify-center'} />
           <span></span>
         </LampContainer>
       )}

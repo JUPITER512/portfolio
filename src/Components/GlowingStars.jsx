@@ -1,125 +1,52 @@
-import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "../utils/utils";
+"use client";
 
-export const GlowingStarsBackgroundCard = ({
-    className,
-    children,
-}) => {
-    const [mouseEnter, setMouseEnter] = useState(false);
+import React, { useState, useRef, Suspense } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Points, PointMaterial, Preload } from "@react-three/drei";
+// @ts-ignore
+import * as random from "maath/random/dist/maath-random.esm";
+
+const StarBackground = (props) => {
+    const ref = useRef();
+    const [sphere] = useState(() =>
+        random.inSphere(new Float32Array(5000), { radius: 1.2 })
+    );
+
+    useFrame((state, delta) => {
+        ref.current.rotation.x -= delta / 10;
+        ref.current.rotation.y -= delta / 15;
+    })
+
 
     return (
-        <div
-            onMouseEnter={() => {
-                setMouseEnter(true);
-            }}
-            onMouseLeave={() => {
-                setMouseEnter(false);
-            }}
-            className={cn(
-                "fixed top-0 left-0 w-full h-full flex justify-center items-center",
-                className
-            )}
-        >
-            <div className="w-full h-full flex flex-col justify-center items-center">
-                <Illustration mouseEnter={mouseEnter} />
-                <div className="px-2 pb-6">{children}</div>
-            </div>
-        </div>
-    );
+        <group rotation={[0, 0, Math.PI / 4]}>
+            <Points
+                ref={ref}
+                positions={sphere}
+                stride={3}
+                frustumCulled
+                {...props}
+            >
+                <PointMaterial
+                    transparent
+                    color="$fff"
+                    size={0.002}
+                    sizeAttenuation={true}
+                    dethWrite={false}
+                />
+            </Points>
+        </group>
+    )
 };
 
-export const Illustration = ({ mouseEnter }) => {
-    const stars = 108;
-    const columns = 18;
+const StarsCanvas = () => (
+    <div className="w-full h-auto fixed inset-0 z-[20] blur-[2px] ">
+        <Canvas camera={{ position: [0, 100, 100] }}>
+            <Suspense fallback={null}>
+                <StarBackground />
+            </Suspense>
+        </Canvas>
+    </div>
+)
 
-    const [glowingStars, setGlowingStars] = useState([]);
-
-    const highlightedStars = useRef([]);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            highlightedStars.current = Array.from({ length:25 }, () =>
-                Math.floor(Math.random() * stars)
-            );
-            setGlowingStars([...highlightedStars.current]);
-        }, 3000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    return (
-        <div
-            className="h-full w-full p-1"
-            style={{
-                display: "grid",
-                gridTemplateColumns: `repeat(${columns}, 1fr)`,
-                gap: `1px`,
-            }}
-        >
-            {[...Array(stars)].map((_, starIdx) => {
-                const isGlowing = glowingStars.includes(starIdx);
-                const delay = (starIdx % 10) * 0.1;
-                const staticDelay = starIdx * 0.01;
-                return (
-                    <div
-                        key={`matrix-col-${starIdx}`}
-                        className="relative flex items-center justify-center"
-                    >
-                        <Star
-                            isGlowing={mouseEnter ? true : isGlowing}
-                            delay={mouseEnter ? staticDelay : delay}
-                        />
-                        {mouseEnter && <Glow delay={staticDelay} />}
-                        <AnimatePresence mode="wait">
-                            {isGlowing && <Glow delay={delay} />}
-                        </AnimatePresence>
-                    </div>
-                );
-            })}
-        </div>
-    );
-};
-
-const Star = ({ isGlowing, delay }) => {
-    return (
-        <motion.div
-            key={delay}
-            initial={{
-                scale: 1,
-            }}
-            animate={{
-                scale: isGlowing ? [1, 1.2, 2.5, 2.2, 1.5] : 1,
-                background: isGlowing ? "#fff" : "#666",
-            }}
-            transition={{
-                duration: 2,
-                ease: "easeInOut",
-                delay: delay,
-            }}
-            className={cn("bg-[#666] h-[1px] w-[1px] rounded-full relative z-20")}
-        ></motion.div>
-    );
-};
-
-const Glow = ({ delay }) => {
-    return (
-        <motion.div
-            initial={{
-                opacity: 0,
-            }}
-            animate={{
-                opacity: 1,
-            }}
-            transition={{
-                duration: 2,
-                ease: "easeInOut",
-                delay: delay,
-            }}
-            exit={{
-                opacity: 0,
-            }}
-            className="absolute left-1/2 -translate-x-1/2 z-10 h-[4px] w-[4px] rounded-full bg-blue-500 blur-[1px] shadow-2xl shadow-blue-400"
-        />
-    );
-};
+export default StarsCanvas;
