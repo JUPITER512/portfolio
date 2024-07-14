@@ -22,7 +22,7 @@ const Sidebar = () => {
   const menuItems = [
     { icon: faHome, label: "Home", link: "home" },
     { icon: faPerson, label: "About Me", link: "AboutMe" },
-    { icon: faTools, label: "Skills", link: "TechStack" },
+    // { icon: faTools, label: "Skills", link: "TechStack" },
     {
       icon: faProjectDiagram,
       label: "Previous Projects",
