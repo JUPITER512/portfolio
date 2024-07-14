@@ -38,9 +38,9 @@ const Sidebar = () => {
  },[select])
   return (
     <div
-      className={`z-[999]  rounded-lg fixed bottom-4 py-2 md:top-[50%] md:transform md:translate-y-[-50%] border-2 transition-all ease-in-out duration-300 bg-gray-900 border-gray-700 text-black dark:bg-gray-100 dark:border-gray-300 ${
-        toggle ? "left-0 md:w-52" : "left-0 md:w-16"
-      } dark:shadow-white shadow-sm backdrop-blur-lg bg-transparent w-[90%] left-[5%] md:left-4`}
+      className={`z-[999] rounded-lg  md:rounded-r-lg fixed bottom-4 py-2 md:top-[50%] md:transform md:translate-y-[-50%] border-2 transition-all ease-in-out duration-300 bg-gray-900 border-gray-700 text-black dark:bg-gray-100 dark:border-gray-300 ${
+        toggle ? "md:left-0 md:w-52" : "md:left-0 md:w-16"
+      } dark:shadow-white shadow-sm backdrop-blur-lg bg-transparent w-[90%] left-[5%]`}
     >
       
       <button

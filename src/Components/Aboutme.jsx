@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Slider from "./Slider";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHtml5, faCss3, faJs, faPython, faNodeJs, faReact, faNode } from '@fortawesome/free-brands-svg-icons'
-import { faDatabase, faWind } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faDatabase, faWind } from "@fortawesome/free-solid-svg-icons";
 
 const images1 = [
   { src: "./js.png", alt: "JavaScript" },
@@ -11,22 +11,31 @@ const images1 = [
   { src: "./node-js.png", alt: "Node" },
   { src: "./express.png", alt: "Express" },
   { src: "./mysql.png", alt: "MySql" },
-  { src: "./redux.png", alt: "Redux" },
-  { src: "./next.png", alt: "Next" },
+  // { src: "./redux.png", alt: "Redux" },
+  // { src: "./next.png", alt: "Next" },
   { src: "./mongodb.png", alt: "Mongo" },
 ];
 const images2 = [
-  { src: "./tailwind.png", alt: "tailwind" },
-  { src: "./prisma.webp", alt: "prisma" },
-  { src: "./postger.png", alt: "postger" },
-  { src: "./mui.png", alt: "mui" },
+  // { src: "./prisma.webp", alt: "prisma" },
+  // { src: "./postger.png", alt: "postger" },
+  // { src: "./mui.png", alt: "mui" },
+  // { src: "./mongodb.png", alt: "Mongo" },
+  { src: "./tailwind.png", alt: "Tailwind" },
   { src: "./docker.webp", alt: "Docker" },
   { src: "./ts.png", alt: "TS" },
   { src: "./css.png", alt: "CSS" },
   { src: "./Firebase.png", alt: "Next" },
-  { src: "./mongodb.png", alt: "Mongo" },
 ];
 const Aboutme = () => {
+  const handleDownloadCv=()=>{
+    const a =document.createElement('a')
+    a.href ='./Syed_Ali_Murtaza_CV.pdf'
+    a.setAttribute(
+      'download',
+      'Syed Ali Murtaza Cv.pdf'
+    )
+    a.click()
+  }
   return (
     <motion.div
       className="bg-blue-300/55 dark:bg-gray-950 flex flex-col items-center px-4 md:py-8 md:px-8 text-white "
@@ -71,31 +80,39 @@ const Aboutme = () => {
             </div>
           </div>
 
-          <div className="my-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+          <div className="my-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 dark:text-white text-black">
             <h2 className="text-xl md:text-2xl lg:text-4xl my-4">Education/Skills</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="border border-gray-200 p-4 rounded-lg">
-                <h3 className="text-lg font-semibold mb-2">Education</h3>
-                <p className="text-gray-700">Bachelor of Science in Computer Science<br />University of Lahore</p>
+                <h3 className="text-lg font-semibold mb-2 text-black">Education</h3>
+                <p className="text-gray-700 dark:text-gray-300">
+                  Bachelor of Science in Computer Science
+                  <br />
+                  University of Lahore
+                </p>
+                <button 
+                onClick={handleDownloadCv}
+                className='flex dark:bg-gray-300 dark:text-black hover:dark:bg-slate-400 duration-300 transition-colors hover:dark:text-white items-center justify-center p-4 rounded-lg gap-4 mx-auto my-10
+                
+                bg-gray-400  text-gray-50 hover:bg-slate-700
+                
+                '>Download CV<FontAwesomeIcon icon={faArrowDown}/></button>
               </div>
 
               <div className="border border-gray-200 p-4 rounded-lg">
                 <h3 className="text-lg font-semibold mb-2">Skills</h3>
                 <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 list-none px-4 py-2">
-                  <li className="flex items-center justify-center py-2 px-3 bg-blue-500 text-white rounded-lg"><FontAwesomeIcon icon={faHtml5} className="mr-2" /> HTML</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-purple-500 text-white rounded-lg"><FontAwesomeIcon icon={faCss3} className="mr-2" /> CSS</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-yellow-500 text-white rounded-lg"><FontAwesomeIcon icon={faJs} className="mr-2" /> JavaScript</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-green-500 text-white rounded-lg"><FontAwesomeIcon icon={faPython} className="mr-2" /> Python</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-indigo-500 text-white rounded-lg"><FontAwesomeIcon icon={faNodeJs} className="mr-2" /> Node.js</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-pink-500 text-white rounded-lg"><FontAwesomeIcon icon={faReact} className="mr-2" /> React.js</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-red-500 text-white rounded-lg"><FontAwesomeIcon icon={faDatabase} className="mr-2" /> MySQL</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-teal-500 text-white rounded-lg"><FontAwesomeIcon icon={faWind} className="mr-2" /> Tailwind CSS</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-orange-500 text-white rounded-lg"><FontAwesomeIcon icon={faNode} className="mr-2" /> Next.js</li>
-                  <li className="flex items-center justify-center py-2 px-3 bg-gray-500 text-white rounded-lg"><FontAwesomeIcon icon={faNodeJs} className="mr-2" /> Express.js</li>
+                  {images1.map((image, index) => (
+                    <li key={index} className="flex flex-col items-center justify-center py-2 px-3 bg-blue-500 text-white rounded-lg">
+                      <img src={image.src} alt={image.alt} className="w-8 h-8 mb-2" />
+                      {image.alt}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
+
           </div>
         </div>
       

@@ -7,7 +7,10 @@ const Techstack = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
         id="TechStack"
-    >Techstack
+    >
+        <div className="">
+
+        </div>
     </motion.div>;
 };
 
