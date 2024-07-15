@@ -38,7 +38,7 @@ const Aboutme = () => {
   }
   return (
     <motion.div
-      className="bg-blue-300/55 dark:bg-gray-950 flex flex-col items-center px-4 md:py-8 md:px-8 text-white "
+      className="bg-blue-300/55 dark:bg-gray-950 flex flex-col items-center px-4 md:py-8 md:px-8 text-white rounded-sm "
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -47,7 +47,7 @@ const Aboutme = () => {
     >
       <div
         className="  w-full text-center
-       items-center justify-between md:px-20"
+       items-center justify-between md:px-20 md:py-10 py-6 "
       >
         <h2 className="text-4xl font-OpenSans italic dark:text-white text-black">
           About Me
