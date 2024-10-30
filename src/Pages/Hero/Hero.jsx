@@ -1,20 +1,18 @@
-
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { BackgroundLines } from "@components/BackgroundLines";
 
 const portfolioData = {
-  "name": "Ali Murtaza",
-  "programmingLanguage": "Javascript,SQL,Python",
-  "stack": "MERN",
-  "experience": "1 Year",
-  "contactMe": {
-    "email": "syedalimurtaza36@gmail.com",
-    "linkedin": "https://www.linkedin.com/in/syedalimurtaza1214/",
-    "github": "https://github.com/JUPITER512"
-  }
+  name: "Ali Murtaza",
+  programmingLanguage: "Javascript,SQL,Python",
+  stack: "MERN",
+  experience: "1 Year",
+  contactMe: {
+    email: "syedalimurtaza36@gmail.com",
+    linkedin: "https://www.linkedin.com/in/syedalimurtaza1214/",
+    github: "https://github.com/JUPITER512",
+  },
 };
-
 
 const TypewriterEffect = () => {
   const [displayState, setDisplayState] = useState({
@@ -58,7 +56,9 @@ const TypewriterEffect = () => {
     const fullText = Object.entries(portfolioData).reduce(
       (acc, [key, value], index, arr) => {
         const valueText =
-          key === "contactMe" ? `{\n${contactMeText}\n    }` : `"${key}": "${value}"`;
+          key === "contactMe"
+            ? `{\n${contactMeText}\n    }`
+            : `"${key}": "${value}"`;
         return (
           acc +
           (index === 0 ? "{\n" : "") +
@@ -160,7 +160,6 @@ const TypewriterEffect = () => {
   );
 };
 
-
 export default function Hero() {
   return (
     <BackgroundLines className="flex items-center justify-center w-full min-h-screen">
@@ -171,11 +170,17 @@ export default function Hero() {
         <div className="flex-1 text-center lg:text-left">
           <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-600 dark:to-white text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">
             Syed Ali Murtaza
-            <br /> Software Engineer.
+            <br /> Software Engineer
           </h2>
           <p className="max-w-xl mx-auto lg:mx-0 text-sm md:text-lg text-neutral-700 dark:text-neutral-400">
             Innovative and detail-oriented Software Engineer with hands-on
-            experience in development
+            experience in full-stack development. Skilled in building robust
+            applications using modern technologies, I have a strong foundation
+            in both frontend and backend development, specializing in the MERN
+            stack, API integration, and web automation. I am passionate about
+            leveraging technology to solve real-world problems and enhance user
+            experiences. My commitment to continuous learning and collaboration
+            drives me to deliver high-quality solutions that meet client needs.
           </p>
         </div>
 
