@@ -1,8 +1,7 @@
-"use client";
 
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
-import { BackgroundLines } from "@/components/BackgroundLines";
+import { BackgroundLines } from "@components/BackgroundLines";
 
 const portfolioData = {
   "name": "Ali Murtaza",
