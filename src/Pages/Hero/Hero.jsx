@@ -34,7 +34,7 @@ const TypewriterEffect = () => {
       // Vary the typing speed based on the character
       const delay =
         fullText[currentIndex] === "\n"
-          ? 150
+          ? 100
           : fullText[currentIndex] === " "
           ? 50
           : Math.random() * 30 + 20; // Random delay between 20-50ms for natural feel
@@ -48,7 +48,6 @@ const TypewriterEffect = () => {
   }, []);
 
   useEffect(() => {
-    // Generate the full text once
     const contactMeText = Object.entries(portfolioData.contactMe)
       .map(([key, value]) => `    "${key}": "${value}"`)
       .join(",\n");
@@ -68,7 +67,6 @@ const TypewriterEffect = () => {
       ""
     );
 
-    // Start typing animation
     typeNextCharacter(fullText, 0);
 
     return () => {
@@ -83,7 +81,7 @@ const TypewriterEffect = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="z-[1111111] w-full lg:w-[500px] bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-lg p-6 font-mono relative group shadow-lg hover:shadow-xl transition-shadow duration-300"
+      className=" w-full lg:w-[500px] bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-lg p-6 font-mono relative group shadow-lg hover:shadow-xl transition-shadow duration-300"
     >
       {/* Editor Controls */}
       <div className="absolute top-3 right-3 flex space-x-2">

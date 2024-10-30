@@ -1,9 +1,8 @@
-"use client";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { Send, Mail, User, MessageSquare } from "lucide-react";
+import {Mail, User, MessageSquare } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
 // Input, Textarea, and Button components
@@ -49,7 +48,7 @@ const Button = ({ type, disabled, className, children }) => {
     <button
       type={type}
       disabled={disabled}
-      className={`rounded bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-5 transition duration-300 transform hover:scale-105 ${className}`}
+      className={`rounded ${disabled?" bg-indigo-300 cursor-not-allowed":""} bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-5 cursor-pointer transition duration-300 transform hover:scale-105 ${className}`}
     >
       {children}
     </button>
