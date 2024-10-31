@@ -1,0 +1,230 @@
+{
+  "name": "Syed Ali Murtaza",
+  "jobTitle": "Software Engineer",
+  "descriptionAboutYourSelf": "Innovative and detail-oriented Software Engineer with hands-on experience in full-stack development. Skilled in building robust applications using modern technologies, I have a strong foundation in both frontend and backend development, specializing in the MERN stack, API integration, and web automation. I am passionate about leveraging technology to solve real-world problems and enhance user experiences.",
+  "typeWriterJsonObject": {
+    "name": "Ali Murtaza",
+    "programmingLanguage": "Javascript, SQL, Python",
+    "stack": "MERN",
+    "experience": "1 Year",
+    "contactMe": {
+      "email": "syedalimurtaza36@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/syedalimurtaza1214/",
+      "github": "https://github.com/JUPITER512"
+    }
+  },
+  "contentData": {
+    "systemsLimited": {
+      "description": "Worked as a Software Engineer Intern at Systems Limited, where I learned backend development using Node.js and built two full-stack projects:",
+      "projects": ["CRM", "ExpenseQL"],
+      "images": [
+        {
+          "src": "./systems.jpeg",
+          "alt": "Systems Limited Office",
+          "width": 500,
+          "height": 500
+        },
+        {
+          "src": "./systemsBuilding.jpg",
+          "alt": "Systems Limited Building",
+          "width": 500,
+          "height": 500
+        }
+      ]
+    },
+    "upwork": {
+      "description": "During this tenure, I worked as a freelancer on Upwork, where I developed web automation solutions and Discord bots using Python, Selenium, and Pycord. Additionally, I successfully built a dashboard with API integration.",
+      "images": [
+        {
+          "src": "./upworkLogo.webp",
+          "alt": "Upwork Logo",
+          "width": 500,
+          "height": 500
+        },
+        {
+          "src": "./freelancerSoftware.png",
+          "alt": "Freelancer Software",
+          "width": 500,
+          "height": 500
+        }
+      ]
+    },
+    "bitbash": {
+      "description": "I began my journey as a Software Engineer at Bitbash, where I gained experience in Python, JavaScript, Selenium, React, and API integration.",
+      "achievements": [
+        "Developed the company's office website using React.",
+        "Contributed as a frontend support developer on 'Opportunify'.",
+        "Created multiple web automation solutions.",
+        "Built a Discord bot for VoIP servers.",
+        "Developed an OpenAI/Whisper-based Chrome extension for ChatGPT."
+      ],
+      "images": [
+        {
+          "src": "./Bitbash.png",
+          "alt": "Bitbash Logo",
+          "width": 500,
+          "height": 500
+        },
+        {
+          "src": "./BitbashBuiling.jpg",
+          "alt": "Bitbash Building",
+          "width": 500,
+          "height": 500
+        }
+      ]
+    }
+  },
+  "project_cards": [
+    {
+      "description": [
+        "ReactJS",
+        "TailwindCSS",
+        "React-Router-Dom",
+        "Vercel (Deploy)",
+        "GSAP",
+        "Axios"
+      ],
+      "title": "Bitbash",
+      "src": "./Bitbash.png",
+      "ctaText": "Repo is Private",
+      "ctaLink": "",
+      "content": "Developed the official website for BitBash to establish their online business presence. Built with React and Tailwind CSS for a modern, responsive design, the site integrates animated SVG elements using GSAP to enhance visual engagement. Implemented interactive page navigation with React Router DOM, leveraging JavaScript for dynamic behavior. This project demonstrates skills in frontend development and animation, aligning with BitBash's branding and digital strategy."
+    },
+    {
+      "description": [
+        "ReactJS",
+        "RecoilJS",
+        "FlowBite",
+        "TailwindCSS",
+        "Axios",
+        "React-Router-Dom",
+        "OAuth2.0 (Discord)"
+      ],
+      "title": "Softquant",
+      "src": "./softquant-logo.jpg",
+      "ctaText": "Repo is Private",
+      "ctaLink": "",
+      "content": "SoftQuant Crypto Dashboard is a comprehensive platform for crypto enthusiasts and traders to monitor various indicators across different timeframes and assets. Users can customize indicator combinations and receive real-time alerts directly to their email or Discord DMs, ensuring they stay updated on important market changes. The app includes OAuth2 integration for Discord, enabling seamless account connectivity for notifications. Key frontend work includes API integration, data filtering, and styling with Tailwind CSS, creating a responsive and efficient user experience tailored for tracking crypto trends and insights."
+    },
+    {
+      "description": [
+        "ReactJS",
+        "NodeJS",
+        "ExpressJS",
+        "MongoDBJS",
+        "JWT",
+        "ReactQuery",
+        "ReactTable",
+        "ReactHookForm",
+        "RecoilJS",
+        "React-Router-Dom"
+      ],
+      "title": "CRM",
+      "src": "./CRM.jpg",
+      "ctaText": "Visit Repo",
+      "ctaLink": "https://github.com/JUPITER512/CRM-Project-Systems",
+      "content": "The CRM Suite is a comprehensive Customer Relationship Manager web application designed to help managers store, retrieve, and modify customer information efficiently. This suite includes both a frontend and backend component that work together to provide a robust solution for managing customer relationships and user authentication. Whether you need to manage your profile, handle customer data, or ensure secure access to the system, CRM Suite offers a complete set of features to meet your needs."
+    },
+    {
+      "description": [
+        "GraphQL",
+        "ReactJS",
+        "TailwindCSS",
+        "MongoDB",
+        "Mongo-session",
+        "ExpressJS",
+        "PassportJS",
+        "react-hot-toast",
+        "React-Router-Dom"
+      ],
+      "title": "ExpenseQL",
+      "src": "./ExpenseQL.png",
+      "ctaText": "Visit",
+      "ctaLink": "https://github.com/JUPITER512/ExpenseQL",
+      "content": "ExpenseQL is a MERN stack application designed as an expense tracker, with added functionalities using GraphQL for efficient data management. The app allows users to perform CRUD operations on expenses and displays a circular graph for a visual overview of their spending. Key features include user authentication, session management with MongoDB, and an intuitive UI that simplifies expense tracking. The project highlights skills in backend and frontend development, utilizing tools like React Query, React Table, and React Hook Form with Yup for seamless data handling and validation."
+    },
+    {
+      "description": [
+          "Docker",
+          "ReactJS",
+          "Node.js",
+          "ExpressJS",
+          "JWT",
+          "MongoDB",
+          "TailwindCSS",
+          "Nodemailer",
+          "Recoil.js",
+          "Ollama AI"
+      ],
+      "title": "WebX AI Chat Bot",
+      "src": "./webX.png",
+      "ctaText": "Visit",
+      "ctaLink": "https://github.com/JUPITER512/WebX-Frontend",
+      "content": "WebX AI Chat Bot is a full-stack AI-powered web application enabling secure user authentication, conversational AI-driven chat, and multi-modal interaction. The app employs JWT tokens for user authentication, ensuring secure access, and utilizes Docker for containerized deployment. With a responsive and clean UI built using TailwindCSS and state management through Recoil.js, the chat bot provides a seamless user experience. The integration of Ollama AI models supports dynamic conversational capabilities, and Nodemailer is used for email notifications. This project showcases skills in backend and frontend development, emphasizing AI integration and user-focused design.Backend Repo (https://github.com/JUPITER512/WebX-Backend)" 
+  }
+  
+  ],
+  "skillsIconColors": {
+    "html": "#E34F26",
+    "css": "#1572B6",
+    "js": "#F7DF1E",
+    "typescript": "#3178C6",
+    "react": "#61DAFB",
+    "recoil": "#3578E5",
+    "redux": "#764ABC",
+    "docker": "#2496ED",
+    "github": "#181717",
+    "git": "#F05032",
+    "nodejs": "#339933",
+    "express": "#000000",
+    "mongodb": "#47A248",
+    "sql": "#4479A1",
+    "postgresql": "#336791",
+    "mysql": "#00758F",
+    "firebase": "#FFCA28",
+    "graphql": "#E10098",
+    "reactHookForm": "#EC5990",
+    "reactQuery": "#FF4154",
+    "jest": "#C21325",
+    "nextjs": "#000000",
+    "vue": "#4FC08D",
+    "angular": "#DD0031",
+    "tailwindcss": "#06B6D4",
+    "bootstrap": "#7952B3",
+    "sass": "#CC6699",
+    "webpack": "#8DD6F9",
+    "babel": "#F9DC3E",
+    "csharp": "#239120",
+    "java": "#007396",
+    "python": "#3776AB",
+    "flask": "#000000",
+    "django": "#092E20",
+    "go": "#00ADD8",
+    "ruby": "#CC342D",
+    "php": "#777BB4",
+    "swift": "#FA7343",
+    "kotlin": "#0095D5",
+    "flutter": "#02569B",
+    "aws": "#FF9900",
+    "azure": "#0078D4",
+    "gcp": "#4285F4",
+    "heroku": "#430098",
+    "netlify": "#00C7B7",
+    "vercel": "#000000",
+    "figma": "#F24E1E",
+    "adobeXD": "#FF61F6",
+    "materialUI": "#007FFF",
+    "antDesign": "#0170FE",
+    "chartJS": "#FF6384",
+    "d3": "#F9A03C",
+    "nginx": "#009639",
+    "terraform": "#623CE4",
+    "kubernetes": "#326CE5",
+    "apache": "#D22128",
+    "oracle": "#F80000",
+    "linux": "#FCC624",
+    "windows": "#0078D6",
+    "bash": "#4EAA25",
+    "powershell": "#5391FE"
+  }
+}

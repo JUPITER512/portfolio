@@ -3,57 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import {Mail, User, MessageSquare } from "lucide-react";
-import toast, { Toaster } from "react-hot-toast";
-
-// Input, Textarea, and Button components
-const Input = ({ type, id, value, onChange, placeholder, onFocus, onBlur }) => {
-  return (
-    <input
-      type={type}
-      id={id}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      className="shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400"
-    />
-  );
-};
-
-const Textarea = ({
-  id,
-  value,
-  onChange,
-  placeholder,
-  onFocus,
-  onBlur,
-  className,
-}) => {
-  return (
-    <textarea
-      id={id}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      className={`shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400 ${className}`}
-    />
-  );
-};
-
-const Button = ({ type, disabled, className, children }) => {
-  return (
-    <button
-      type={type}
-      disabled={disabled}
-      className={`rounded ${disabled?" bg-indigo-300 cursor-not-allowed":""} bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-5 cursor-pointer transition duration-300 transform hover:scale-105 ${className}`}
-    >
-      {children}
-    </button>
-  );
-};
+import { Toaster } from "react-hot-toast";
+import Button from "@components/Button";
+import Textarea from "@components/TextArea";
+import Input from "@components/Input";
+import {notify,loading,error} from '@utils/ToastFunction'
 
 const formFields = [
   { id: "name", label: "Name", icon: User, type: "text" },
@@ -61,52 +15,7 @@ const formFields = [
   { id: "message", label: "Message", icon: MessageSquare, type: "textarea" },
 ];
 
-// Toast notifications
-const notify = (msg) =>
-  toast.success(msg, {
-    duration: 3000,
-    position: "top-center",
-    icon: "👏",
-    style: {
-      backgroundColor: "#1F2937",
-      boxShadow: "revert",
-      color: "white",
-    },
-    ariaProps: {
-      role: "status",
-      "aria-live": "polite",
-    },
-  });
 
-const loading = (msg) =>
-  toast.loading(msg, {
-    duration: 3000,
-    position: "top-center",
-    icon: "⏳",
-    style: {
-      backgroundColor: "gray",
-      color: "white",
-    },
-    ariaProps: {
-      role: "status",
-      "aria-live": "polite",
-    },
-  });
-
-const error = (msg) =>
-  toast.error(msg, {
-    duration: 3000,
-    position: "top-center",
-    icon: "❌",
-    style: {
-      backgroundColor: "lightgrey",
-      color: "white",
-    },
-    ariaProps: {
-      role: "status",
-      "aria-live": "polite",
-    },
-  });
 
 const ContactMe = () => {
   const [formData, setFormData] = useState({
@@ -129,15 +38,16 @@ const ContactMe = () => {
 
     try {
       await emailjs.send(
-        "service_exghjaf",
-        "template_59ka7rf",
+        import.meta.env.SERVICE_ID,
+        import.meta.env.TEMPLATE_ID,
         {
-          to_name: "Syed Ali Murtaza",
+          to_name: import.meta.env.TO_NAME,
           from_name: formData.name,
+          from_email:formData.email,
           message: formData.message,
         },
         {
-          publicKey: "xtKsD3oVw0Av9s9w-",
+          publicKey: import.meta.env.PUBLIC_KEY,
         }
       );
       notify("Message sent successfully!");

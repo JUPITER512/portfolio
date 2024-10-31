@@ -1,68 +1,13 @@
 import { FloatingDock } from "./FloatingDock";
-import {
-  IconHome,
-  IconClock,
-  IconMail,
-  IconComponents,
-  IconListCheck,
-  IconDownload  
-} from "@tabler/icons-react";
-
+import { links } from "@data/NavBarData";
 export function Header() {
-
-  const links = [
-    {
-      title: "Home",
-      icon: (
-        <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "home",
-    },
-
-    {
-      title: "Experience",
-      icon: (
-        <IconClock className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "experience",
-    },
-    {
-      title: "Projects",
-      icon: (
-        <IconComponents className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "projects",
-    },
-    {
-      title: "skills",
-      icon: (
-        <IconListCheck className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "skills",
-    },
-
-    {
-      title: "Contact-me",
-      icon: (
-        <IconMail className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "contactme",
-    },
-    {
-      title:"CV",
-      icon:(        <IconDownload className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      )
-    }
-
-  ];
-
   return (
-    <div className="flex items-center justify-center h-[35rem] w-full">
-      <FloatingDock
-        mobileClassName="translate-y-20"
-        items={links}
-      />
-    
-    </div>
+    <FloatingDock
+    desktopClassName={"fixed top-[90vh] left-[50%] translate-x-[-50%] z-[50]"}
+    mobileClassName={'fixed top-[90vh] right-[5%] z-[111150]'}
+    items={links}
+    />
+    // <div className="flex items-center justify-center  w-full">
+    // </div>
   );
 }
