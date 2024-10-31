@@ -10,8 +10,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'My Portfolio',
-        short_name: 'Portfolio',
+        name: 'Syed Ali Murtaza Portfolio',
+        short_name: 'Ali\'s Portfolio',
         description: 'A showcase of my skills, experience, and projects.',
         theme_color: '#222831',
         background_color: '#EEEEEE',
