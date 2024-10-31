@@ -59,12 +59,6 @@ const ContactMe = () => {
       setIsSubmitting(false);
     }
   };
-  console.log({
-    p:import.meta.env.VITE_PUBLIC_KEY,
-    s:import.meta.env.VITE_SERVICE_ID,
-    t:import.meta.env.VITE_TEMPLATE_ID
-
-  })
   return (
     <motion.div
       className="min-h-screen dark:bg-black bg-white  dark:bg-dot-white/[0.1] bg-dot-black/[0.2] py-10 px-4 md:px-6"
