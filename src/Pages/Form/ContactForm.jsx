@@ -38,16 +38,16 @@ const ContactMe = () => {
 
     try {
       await emailjs.send(
-        import.meta.env.SERVICE_ID,
-        import.meta.env.TEMPLATE_ID,
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
         {
-          to_name: import.meta.env.TO_NAME,
+          to_name: import.meta.env.VITE_TO_NAME,
           from_name: formData.name,
           from_email:formData.email,
           message: formData.message,
         },
         {
-          publicKey: import.meta.env.PUBLIC_KEY,
+          publicKey: import.meta.env.VITE_PUBLIC_KEY,
         }
       );
       notify("Message sent successfully!");
@@ -59,7 +59,12 @@ const ContactMe = () => {
       setIsSubmitting(false);
     }
   };
+  console.log({
+    p:import.meta.env.VITE_PUBLIC_KEY,
+    s:import.meta.env.VITE_SERVICE_ID,
+    t:import.meta.env.VITE_TEMPLATE_ID
 
+  })
   return (
     <motion.div
       className="min-h-screen dark:bg-black bg-white  dark:bg-dot-white/[0.1] bg-dot-black/[0.2] py-10 px-4 md:px-6"
