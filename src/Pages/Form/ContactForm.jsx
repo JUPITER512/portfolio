@@ -38,16 +38,16 @@ const ContactMe = () => {
 
     try {
       await emailjs.send(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
+        import.meta.env.SERVICE_ID,
+        import.meta.env.TEMPLATE_ID,
         {
-          to_name: import.meta.env.VITE_TO_NAME,
+          to_name: import.meta.env.TO_NAME,
           from_name: formData.name,
           from_email:formData.email,
           message: formData.message,
         },
         {
-          publicKey: import.meta.env.VITE_PUBLIC_KEY,
+          publicKey: import.meta.env.PUBLIC_KEY,
         }
       );
       notify("Message sent successfully!");
@@ -60,9 +60,9 @@ const ContactMe = () => {
     }
   };
   console.log({
-    p:import.meta.env.VITE_PUBLIC_KEY,
-    s:import.meta.env.VITE_SERVICE_ID,
-    t:import.meta.env.VITE_TEMPLATE_ID
+    p:import.meta.env.PUBLIC_KEY,
+    s:import.meta.env.SERVICE_ID,
+    t:import.meta.env.TEMPLATE_ID
 
   })
   return (
