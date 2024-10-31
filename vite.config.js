@@ -40,8 +40,12 @@ export default defineConfig({
       '@utils':path.resolve(__dirname,'./src/utils'),
       '@hooks':path.resolve(__dirname,'./src/Hooks'),
       '@data':path.resolve(__dirname,'./src/Data'),
-      
-
     }
+  },
+  define:{
+    'process.env.VITE_SERVICE_ID': JSON.stringify(process.env.SERVICE_ID),
+    'process.env.VITE_TEMPLATE_ID': JSON.stringify(process.env.TEMPLATE_ID),
+    'process.env.VITE_PUBLIC_KEY': JSON.stringify(process.env.PUBLIC_KEY),
+    'process.env.VITE_TO_NAME': JSON.stringify(process.env.TO_NAME),
   }
 })
