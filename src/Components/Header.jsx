@@ -4,7 +4,7 @@ export function Header() {
   return (
     <FloatingDock
     desktopClassName={"fixed top-[90vh] left-[50%] translate-x-[-50%] z-[50]"}
-    mobileClassName={'fixed top-[90vh] right-[5%] z-[111150]'}
+    mobileClassName={'fixed top-[90dvh] right-[5%] z-[50] '}
     items={links}
     />
     // <div className="flex items-center justify-center  w-full">
