@@ -145,24 +145,37 @@
     },
     {
       "description": [
-          "Docker",
-          "ReactJS",
-          "Node.js",
-          "ExpressJS",
-          "JWT",
-          "MongoDB",
-          "TailwindCSS",
-          "Nodemailer",
-          "Recoil.js",
-          "Ollama AI"
+        "Docker",
+        "ReactJS",
+        "Node.js",
+        "ExpressJS",
+        "JWT",
+        "MongoDB",
+        "TailwindCSS",
+        "Nodemailer",
+        "Recoil.js",
+        "Ollama AI"
       ],
       "title": "WebX AI Chat Bot",
       "src": "./webX.png",
       "ctaText": "Visit",
       "ctaLink": "https://github.com/JUPITER512/WebX-Frontend",
-      "content": "WebX AI Chat Bot is a full-stack AI-powered web application enabling secure user authentication, conversational AI-driven chat, and multi-modal interaction. The app employs JWT tokens for user authentication, ensuring secure access, and utilizes Docker for containerized deployment. With a responsive and clean UI built using TailwindCSS and state management through Recoil.js, the chat bot provides a seamless user experience. The integration of Ollama AI models supports dynamic conversational capabilities, and Nodemailer is used for email notifications. This project showcases skills in backend and frontend development, emphasizing AI integration and user-focused design.Backend Repo (https://github.com/JUPITER512/WebX-Backend)" 
-  }
-  
+      "content": "WebX AI Chat Bot is a full-stack AI-powered web application enabling secure user authentication, conversational AI-driven chat, and multi-modal interaction. The app employs JWT tokens for user authentication, ensuring secure access, and utilizes Docker for containerized deployment. With a responsive and clean UI built using TailwindCSS and state management through Recoil.js, the chat bot provides a seamless user experience. The integration of Ollama AI models supports dynamic conversational capabilities, and Nodemailer is used for email notifications. This project showcases skills in backend and frontend development, emphasizing AI integration and user-focused design.Backend Repo (https://github.com/JUPITER512/WebX-Backend)"
+    },
+    {
+      "description": [
+        "React",
+        "Tailwind",
+        "EmailJs",
+        "Aceternity ui",
+        "React-hook-form"
+      ],
+      "title": "My Portfolio",
+      "src": "./Portfolio.png",
+      "ctaText": "Visit Repo",
+      "ctaLink": "https://github.com/JUPITER512/portfolio",
+      "content": "This portfolio showcases my skills and projects, serving as a digital resume to highlight my experience and technical expertise. Built with React, Tailwind CSS, and integrated with EmailJS for seamless communication, it provides visitors with an engaging overview of my work and achievements."
+    }
   ],
   "skillsIconColors": {
     "html": "#E34F26",
