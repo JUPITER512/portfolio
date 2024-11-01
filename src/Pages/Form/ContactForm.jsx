@@ -1,13 +1,12 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import {Mail, User, MessageSquare } from "lucide-react";
+import { Mail, User, MessageSquare } from "lucide-react";
 import { Toaster } from "react-hot-toast";
-import Button from "@components/Button";
-import Textarea from "@components/TextArea";
-import Input from "@components/Input";
-import {notify,loading,error} from '@utils/ToastFunction'
+import { notify, loading, error } from "@utils/ToastFunction";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 const formFields = [
   { id: "name", label: "Name", icon: User, type: "text" },
@@ -15,53 +14,48 @@ const formFields = [
   { id: "message", label: "Message", icon: MessageSquare, type: "textarea" },
 ];
 
-
+const schema = yup.object({
+  email: yup.string().email().trim().required("Email is required"),
+  name: yup.string().trim().min(1, "Name is required").required(),
+  message: yup.string().trim().min(1, "Message is required").required()
+}).required();
 
 const ContactMe = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
+    resolver: yupResolver(schema)
   });
-  const [focusedField, setFocusedField] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useRef(null);
 
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const sendEmail = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const sendEmail = async (data) => {
     loading("Sending your message...");
-
+    if(data.email.length == 0  || data.name.length ==0 || data.message.length==0){
+      throw new Error('Empty fields not allowed')
+    }
     try {
       await emailjs.send(
         import.meta.env.VITE_SERVICE_ID,
         import.meta.env.VITE_TEMPLATE_ID,
         {
           to_name: import.meta.env.VITE_TO_NAME,
-          from_name: formData.name,
-          from_email:formData.email,
-          message: formData.message,
+          from_name: data.name,
+          from_email: data.email,
+          message: data.message,
         },
         {
           publicKey: import.meta.env.VITE_PUBLIC_KEY,
         }
       );
       notify("Message sent successfully!");
-      setFormData({ name: "", email: "", message: "" });
+      reset();
     } catch (err) {
       console.error("Failed to send email:", err);
       error("Failed to send message");
-    } finally {
-      setIsSubmitting(false);
     }
   };
+
   return (
     <motion.div
-      className="min-h-screen dark:bg-black bg-white  dark:bg-dot-white/[0.1] bg-dot-black/[0.2] py-10 px-4 md:px-6"
+      className="min-h-screen dark:bg-black bg-white dark:bg-dot-white/[0.1] bg-dot-black/[0.2] py-10 px-4 md:px-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -69,7 +63,6 @@ const ContactMe = () => {
       id="contactme"
     >
       <Toaster />
-
       <motion.h3
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -112,7 +105,7 @@ const ContactMe = () => {
         >
           <form
             ref={form}
-            onSubmit={sendEmail}
+            onSubmit={handleSubmit(sendEmail)}
             className="bg-white dark:bg-gray-800/50 backdrop-blur-lg p-8 rounded-2xl shadow-xl dark:shadow-2xl space-y-6"
           >
             <AnimatePresence mode="wait">
@@ -128,9 +121,6 @@ const ContactMe = () => {
                   <motion.label
                     htmlFor={id}
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                    animate={{
-                      color: focusedField === id ? "#6366f1" : "",
-                    }}
                   >
                     <div className="flex items-center gap-2">
                       <Icon className="w-4 h-4" />
@@ -139,36 +129,39 @@ const ContactMe = () => {
                   </motion.label>
 
                   {type === "textarea" ? (
-                    <Textarea
+                    <textarea
+                      {...register(id)}
                       id={id}
-                      value={formData[id]}
-                      onChange={(e) => handleInputChange(id, e.target.value)}
-                      onFocus={() => setFocusedField(id)}
-                      onBlur={() => setFocusedField(null)}
-                      className="min-h-[100px] resize-none"
+                      className={`min-h-[100px] resize-none shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400`}
                       placeholder={`Enter your ${label.toLowerCase()}`}
                     />
                   ) : (
-                    <Input
+                    <input
+                      {...register(id)}
                       type={type}
                       id={id}
-                      value={formData[id]}
-                      onChange={(e) => handleInputChange(id, e.target.value)}
-                      onFocus={() => setFocusedField(id)}
-                      onBlur={() => setFocusedField(null)}
                       placeholder={`Enter your ${label.toLowerCase()}`}
+                      className="shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400"
                     />
+                  )}
+                  {errors[id] && (
+                    <p className="text-red-500 text-xs mt-1">{errors[id]?.message}</p>
                   )}
                 </motion.div>
               ))}
             </AnimatePresence>
-            <Button type="submit" disabled={isSubmitting} className="w-full">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full rounded ${
+                isSubmitting ? " bg-indigo-300 cursor-not-allowed" : ""
+              } bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-5 cursor-pointer transition duration-300 transform hover:scale-105`}
+            >
               {isSubmitting ? "Sending..." : "Send Message"}
-            </Button>
+            </button>
           </form>
         </motion.div>
       </div>
-      
     </motion.div>
   );
 };
