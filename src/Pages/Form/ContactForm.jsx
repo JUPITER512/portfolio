@@ -5,31 +5,42 @@ import { Mail, User, MessageSquare } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 import { notify, loading, error } from "@utils/ToastFunction";
 import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const formFields = [
-  { id: "name", label: "Name", icon: User, type: "text" },
-  { id: "email", label: "Email", icon: Mail, type: "email" },
-  { id: "message", label: "Message", icon: MessageSquare, type: "textarea" },
+  { id: "name", label: "Name", icon: User, type: "text" ,pattern:""},
+  { id: "email", label: "Email", icon: Mail, type: "email" ,pattern :/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ },
+  { id: "message", label: "Message", icon: MessageSquare, type: "textarea",pattern:"" },
 ];
 
-const schema = yup.object({
-  email: yup.string().email().trim().required("Email is required"),
-  name: yup.string().trim().min(1, "Name is required").required(),
-  message: yup.string().trim().min(1, "Message is required").required()
-}).required();
+const schema = yup
+  .object({
+    email: yup.string().email().trim().required("Email is required"),
+    name: yup.string().trim().min(1, "Name is required").required(),
+    message: yup.string().trim().min(1, "Message is required").required(),
+  })
+  .required();
 
 const ContactMe = () => {
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
-    resolver: yupResolver(schema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isDirty, isValid },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
   });
   const form = useRef(null);
 
   const sendEmail = async (data) => {
     loading("Sending your message...");
-    if(data.email.length == 0  || data.name.length ==0 || data.message.length==0){
-      throw new Error('Empty fields not allowed')
+    if (
+      data.email.length == 0 ||
+      data.name.length == 0 ||
+      data.message.length == 0
+    ) {
+      throw new Error("Empty fields not allowed");
     }
     try {
       await emailjs.send(
@@ -109,7 +120,7 @@ const ContactMe = () => {
             className="bg-white dark:bg-gray-800/50 backdrop-blur-lg p-8 rounded-2xl shadow-xl dark:shadow-2xl space-y-6"
           >
             <AnimatePresence mode="wait">
-              {formFields.map(({ id, label, icon: Icon, type }) => (
+              {formFields.map(({ id, label, icon: Icon, type ,pattern}) => (
                 <motion.div
                   key={id}
                   initial={{ x: -20, opacity: 0 }}
@@ -130,14 +141,16 @@ const ContactMe = () => {
 
                   {type === "textarea" ? (
                     <textarea
-                      {...register(id)}
+                      {...register(id,)}
                       id={id}
                       className={`min-h-[100px] resize-none shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400`}
                       placeholder={`Enter your ${label.toLowerCase()}`}
                     />
                   ) : (
                     <input
-                      {...register(id)}
+                      {...register(id,{
+                        pattern:pattern
+                      })}
                       type={type}
                       id={id}
                       placeholder={`Enter your ${label.toLowerCase()}`}
@@ -145,20 +158,28 @@ const ContactMe = () => {
                     />
                   )}
                   {errors[id] && (
-                    <p className="text-red-500 text-xs mt-1">{errors[id]?.message}</p>
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors[id]?.message}
+                    </p>
                   )}
                 </motion.div>
               ))}
             </AnimatePresence>
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValid || !isDirty}
               className={`w-full rounded ${
-                isSubmitting ? " bg-indigo-300 cursor-not-allowed" : ""
-              } bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-5 cursor-pointer transition duration-300 transform hover:scale-105`}
+                isSubmitting || !isValid || !isDirty
+                  ? "bg-indigo-300 cursor-not-allowed"
+                  : "bg-indigo-500 hover:bg-indigo-600 transition duration-300 transform hover:scale-105 cursor-pointer"
+              } text-white font-bold py-3 px-5  `}
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
+            {
+              isSubmitting || isValid || !isDirty?"":
+              <p className=" bg-gray-300 text-center p-1 rounded-md">Please Fill  All Fields to enable submit button</p>
+            }
           </form>
         </motion.div>
       </div>
