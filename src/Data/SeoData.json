@@ -1,0 +1,118 @@
+{
+    "personalInfo": {
+      "name": "Syed Ali Murtaza",
+      "linkedin": "https://linkedin.com/in/syedalimurtaza1214/",
+      "github": "https://github.com/JUPITER512",
+      "portfolio": "https://alimurtaza.dev/"
+    },
+    "objective": "Innovative and detail-oriented Software Engineer with hands-on experience in developing full-stack applications using the MERN stack (MongoDB, Express.js, React.js, Node.js) and knowledge of creating web automation and data scraping solutions. Demonstrated ability to lead and collaborate on diverse projects, developing user-friendly interfaces. Good problem-solving skills, with a focus on delivering high-quality, user-centric solutions.",
+    "education": [
+      {
+        "institution": "University of Lahore",
+        "degree": "Bachelor of Science in Computer Science",
+        "location": "Lahore, Pakistan"
+      },
+      {
+        "institution": "Government College University",
+        "degree": "Intermediate",
+        "location": "Lahore, Pakistan"
+      }
+    ],
+    "experience": [
+      {
+        "title": "Software Engineer Intern",
+        "company": "Systems Limited",
+        "location": "Lahore",
+        "duration": "Aug 2024 – Oct 2024",
+        "responsibilities": [
+          "Learned backend development using Node.js and Express.js.",
+          "Gained experience with React Query, React Table, and React Hook Form (with Yup for validation).",
+          "Worked on UI design and setting up full-stack projects.",
+          "Developed a CRM system with full-stack features, including user authentication.",
+          "Explored GraphQL basics and created ExpenseQL, a GraphQL-based expense tracker with MongoDB session-based authentication.",
+          "Implemented circular graphs to visualize monthly expense data."
+        ]
+      },
+      {
+        "title": "Freelancer",
+        "duration": "Mar 2024 – July 2024",
+        "responsibilities": [
+          "Developed a web dashboard for crypto asset selection and alert routing.",
+          "Developed Selenium Base Web Automation Bot with API integration for scraping and automation.",
+          "Managed and deployed bots on the server.",
+          "Deployed the project on Vercel and assigned a GoDaddy domain."
+        ]
+      },
+      {
+        "title": "Software Developer",
+        "company": "BitBash",
+        "location": "Lahore",
+        "duration": "Aug 2023 – Feb 2024",
+        "responsibilities": [
+          "Wrote Python scripts to automate daily web tasks for clients.",
+          "Developed web-based applications using React (front end) and Node.js (backend).",
+          "Improved application performance through optimization and caching strategies."
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "BitBash Website",
+        "technologies": ["JavaScript", "React.js", "Tailwind CSS"],
+        "description": [
+          "Developed a full-fledged multipage office web application using React.js and Tailwind CSS.",
+          "Integrated EmailJS for form communication and Google Analytics.",
+          "Deployed on Vercel and set domain.",
+          "Used Toastify and Top loader library to stylize the web application.",
+          "Optimized SEO using Helmet tag for each page."
+        ]
+      },
+      {
+        "name": "SoftQuant",
+        "technologies": ["JavaScript", "React.js", "Tailwind CSS", "Recoil.js", "API Integration"],
+        "description": [
+          "Developed a dashboard for clients to select different crypto assets/coins for alerts routed to their inboxes.",
+          "Styled the components with Tailwind CSS.",
+          "Implemented Recoil.js (atoms) for state management.",
+          "Integrated backend APIs to communicate with the server.",
+          "Modularized the code into small chunks for reusability and better structure."
+        ]
+      },
+      {
+        "name": "ExpenseQL: GraphQL Expense Tracker",
+        "technologies": ["Node.js", "Express.js", "MongoDB", "GraphQL", "React.js", "Tailwind CSS"],
+        "description": [
+          "Developed a full-stack expense management application with user authentication using session-based MongoDB.",
+          "Implemented GraphQL queries for managing expenses and optimized data retrieval.",
+          "Visualized monthly expenses with a circular graph to represent the spending distribution.",
+          "Used React.js for frontend development and React Hook Form with Yup for form validation."
+        ]
+      },
+      {
+        "name": "CRM Full-Stack Application",
+        "technologies": ["React.js", "Node.js", "Express.js", "MongoDB", "React Query", "React Table"],
+        "description": [
+          "Developed a full-stack CRM system with user authentication and session-based management.",
+          "Used React Query for data fetching and state synchronization.",
+          "Utilized React Table for efficient data display and management.",
+          "Focused on user-centric UI design and implemented React Hook Form with Yup for form validation."
+        ]
+      },
+      {
+        "name": "WebX AI Chat Bot",
+        "technologies": ["React.js", "Aceternity UI", "Tailwind CSS", "Recoil.js", "Node.js", "Express.js", "MongoDB", "Ollama AI Models"],
+        "description": [
+          "Developed a full-stack AI web app that allows user authentication, AI-driven chat, and multi-modal selection.",
+          "Implemented authentication using JWT tokens for secure user logins.",
+          "Built a clean UI with Tailwind CSS and Recoil.js for state management.",
+          "Integrated Ollama AI models for conversational experiences, allowing multi-modal input."
+        ]
+      }
+    ],
+    "technicalSkills": {
+      "languages": ["JavaScript", "TypeScript (intermediate)", "SQL", "HTML/CSS", "Tailwind CSS"],
+      "developerTools": ["Git/Github", "Vercel", "Postman", "Docker (Basic)"],
+      "technologies": ["Node.js", "Express.js", "React.js", "Recoil.js (State Management)", "MongoDB", "React-Hook-Form", "React-Query", "React-Table (Basics)", "MySQL"]
+    }
+  }
+  

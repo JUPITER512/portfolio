@@ -4,10 +4,12 @@
   import Projects from "@pages/Projects/Projects";
   import Skills from "@pages/Skills/Skills";
   import { Header } from "@components/Header";
+  import Seo from '@components/Seo'
   
   const Home = () => {
     return (
       <>
+          <Seo/>
           <Header/>
           <Hero/>
           <Experience/>
