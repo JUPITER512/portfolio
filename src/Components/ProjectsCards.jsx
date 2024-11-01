@@ -110,9 +110,20 @@ export function ProjectCards() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    href={active.ctaLink}
-                    target="_blank"
-                    className="px-4 py-3 text-sm rounded-full font-bold bg-green-500 text-white"
+                    href={
+                      active.ctaText === "Repo is Private"
+                        ? undefined
+                        : active.ctaLink
+                    }
+                    target={
+                      active.ctaText === "Repo is Private" ? "_self" : "_blank"
+                    }
+                    aria-disabled={active.ctaText === "Repo is Private"}
+                    className={`px-4 py-3 text-sm rounded-full font-bold text-white ${
+                      active.ctaText === "Repo is Private"
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-green-500"
+                    }`}
                   >
                     {active.ctaText}
                   </motion.a>

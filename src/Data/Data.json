@@ -104,7 +104,7 @@
       "src": "./softquant-logo.jpg",
       "ctaText": "Repo is Private",
       "ctaLink": "",
-      "content": "SoftQuant Crypto Dashboard is a comprehensive platform for crypto enthusiasts and traders to monitor various indicators across different timeframes and assets. Users can customize indicator combinations and receive real-time alerts directly to their email or Discord DMs, ensuring they stay updated on important market changes. The app includes OAuth2 integration for Discord, enabling seamless account connectivity for notifications. Key frontend work includes API integration, data filtering, and styling with Tailwind CSS, creating a responsive and efficient user experience tailored for tracking crypto trends and insights."
+      "content": "SoftQuant (https://softquant.io/) Crypto Dashboard is a comprehensive platform for crypto enthusiasts and traders to monitor various indicators across different timeframes and assets. Users can customize indicator combinations and receive real-time alerts directly to their email or Discord DMs, ensuring they stay updated on important market changes. The app includes OAuth2 integration for Discord, enabling seamless account connectivity for notifications. Key frontend work includes API integration, data filtering, and styling with Tailwind CSS, creating a responsive and efficient user experience tailored for tracking crypto trends and insights."
     },
     {
       "description": [
