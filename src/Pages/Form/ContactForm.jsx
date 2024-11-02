@@ -176,10 +176,7 @@ const ContactMe = () => {
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
-            {
-              isSubmitting?"":
-              <p className=" bg-gray-300 text-center p-1 rounded-md">Please Fill All Fields Correctly to Send Message</p>
-            }
+            
           </form>
         </motion.div>
       </div>
