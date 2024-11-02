@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Mail, User, MessageSquare } from "lucide-react";
 import { Toaster } from "react-hot-toast";
@@ -8,17 +8,23 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+// Add a strict email regex pattern here if needed.
+const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
 const formFields = [
-  { id: "name", label: "Name", icon: User, type: "text" ,pattern:""},
-  { id: "email", label: "Email", icon: Mail, type: "email" ,pattern :/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ },
-  { id: "message", label: "Message", icon: MessageSquare, type: "textarea",pattern:"" },
+  { id: "name", label: "Name", icon: User, type: "text" },
+  { id: "email", label: "Email", icon: Mail, type: "email" },
+  { id: "message", label: "Message", icon: MessageSquare, type: "textarea" },
 ];
 
 const schema = yup
   .object({
-    email: yup.string().email().trim().required("Email is required"),
-    name: yup.string().trim().min(1, "Name is required").required(),
-    message: yup.string().trim().min(1, "Message is required").required(),
+    email: yup.string().email("Invalid email format").required("Email is required"),
+    name: yup
+      .string()
+      .required("Name is required")
+      .matches(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
+    message: yup.string().required("Message is required"),
   })
   .required();
 
@@ -26,22 +32,32 @@ const ContactMe = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting, isDirty, isValid },
     reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
+  
   const form = useRef(null);
+  const [debouncedEmailError, setDebouncedEmailError] = useState("");
+  const enteredEmail = watch("email");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (enteredEmail && !emailPattern.test(enteredEmail)) {
+        setDebouncedEmailError("Invalid email format");
+      } else {
+        setDebouncedEmailError("");
+      }
+    }, 1000);
+
+    // Clear the timer if the user is still typing
+    return () => clearTimeout(timer);
+  }, [enteredEmail]);
 
   const sendEmail = async (data) => {
     loading("Sending your message...");
-    if (
-      data.email.length == 0 ||
-      data.name.length == 0 ||
-      data.message.length == 0
-    ) {
-      throw new Error("Empty fields not allowed");
-    }
     try {
       await emailjs.send(
         import.meta.env.VITE_SERVICE_ID,
@@ -120,7 +136,7 @@ const ContactMe = () => {
             className="bg-white dark:bg-gray-800/50 backdrop-blur-lg p-8 rounded-2xl shadow-xl dark:shadow-2xl space-y-6"
           >
             <AnimatePresence mode="wait">
-              {formFields.map(({ id, label, icon: Icon, type ,pattern}) => (
+              {formFields.map(({ id, label, icon: Icon, type }) => (
                 <motion.div
                   key={id}
                   initial={{ x: -20, opacity: 0 }}
@@ -141,25 +157,23 @@ const ContactMe = () => {
 
                   {type === "textarea" ? (
                     <textarea
-                      {...register(id,)}
+                      {...register(id)}
                       id={id}
                       className={`min-h-[100px] resize-none shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400`}
                       placeholder={`Enter your ${label.toLowerCase()}`}
                     />
                   ) : (
                     <input
-                      {...register(id,{
-                        pattern:pattern
-                      })}
+                      {...register(id)}
                       type={type}
                       id={id}
                       placeholder={`Enter your ${label.toLowerCase()}`}
                       className="shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400"
                     />
                   )}
-                  {errors[id] && (
+                  {(errors[id] || (id === "email" && debouncedEmailError)) && (
                     <p className="text-red-500 text-xs mt-1">
-                      {errors[id]?.message}
+                      {errors[id]?.message || debouncedEmailError}
                     </p>
                   )}
                 </motion.div>
@@ -172,14 +186,10 @@ const ContactMe = () => {
                 isSubmitting || !isValid || !isDirty
                   ? "bg-indigo-300 cursor-not-allowed"
                   : "bg-indigo-500 hover:bg-indigo-600 transition duration-300 transform hover:scale-105 cursor-pointer"
-              } text-white font-bold py-3 px-5  `}
+              } text-white font-bold py-3 px-5`}
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
-            {
-              isSubmitting?"":
-              <p className=" bg-gray-300 text-center p-1 rounded-md">Please Fill All Fields Correctly to Send Message</p>
-            }
           </form>
         </motion.div>
       </div>
