@@ -190,6 +190,7 @@ const ContactMe = () => {
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
+          </form>
         </motion.div>
       </div>
     </motion.div>
