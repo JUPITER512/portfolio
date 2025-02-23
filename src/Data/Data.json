@@ -1,7 +1,7 @@
 {
   "name": "Syed Ali Murtaza",
   "jobTitle": "Software Engineer",
-  "descriptionAboutYourSelf": "Innovative and detail-oriented Software Engineer with hands-on experience in full-stack development. Skilled in building robust applications using modern technologies, I have a strong foundation in both frontend and backend development, specializing in the MERN stack, API integration, and web automation. I am passionate about leveraging technology to solve real-world problems and enhance user experiences.",
+  "descriptionAboutYourSelf": "Innovative and detail-oriented Software Engineer with hands-on experience in full-stack development and a strong enthusiasm for Data Science. Skilled in building robust, data-driven applications using modern technologies, I specialize in the MERN stack, API integration, and web automation. With experience in handling large-scale data processing and building data-heavy web applications, I am passionate about leveraging AI/ML, big data analytics, and data engineering techniques to solve real-world problems and enhance user experiences.",
   "typeWriterJsonObject": {
     "name": "Ali Murtaza",
     "programmingLanguage": "Javascript, SQL, Python",
@@ -33,7 +33,7 @@
       ]
     },
     "upwork": {
-      "description": "During this tenure, I worked as a freelancer on Upwork, where I developed web automation solutions and Discord bots using Python, Selenium, and Pycord. Additionally, I successfully built a dashboard with API integration.",
+      "description": "During this tenure, I worked as a freelancer on Upwork, where I developed web automation solutions and Discord bots using Python, Selenium, and Pycord. Additionally, I successfully built a dashboard with API integration. I also designed and implemented robust web data mining scripts, efficiently managing and processing thousands of data points to extract valuable insights and automate complex workflows.",
       "images": [
         {
           "src": "./upworkLogo.webp",
@@ -50,13 +50,15 @@
       ]
     },
     "bitbash": {
-      "description": "I began my journey as a Software Engineer at Bitbash, where I gained experience in Python, JavaScript, Selenium, React, and API integration.",
+      "description": "I began my journey as a Software Engineer at Bitbash, where I gained experience in Python, JavaScript, Selenium, React, and API integration. I also worked extensively with data handling, processing large datasets, and extracting meaningful insights to improve automation workflows and application efficiency.",
       "achievements": [
         "Developed the company's office website using React.",
         "Contributed as a frontend support developer on 'Opportunify'.",
         "Created multiple web automation solutions.",
         "Built a Discord bot for VoIP servers.",
-        "Developed an OpenAI/Whisper-based Chrome extension for ChatGPT."
+        "Developed an OpenAI/Whisper-based Chrome extension for ChatGPT.",
+        "Designed and implemented data processing pipelines to handle large-scale datasets.",
+        "Extracted actionable insights from structured and unstructured data for automation and decision-making."
       ],
       "images": [
         {
