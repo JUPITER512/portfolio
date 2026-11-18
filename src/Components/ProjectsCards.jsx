@@ -1,227 +1,175 @@
-import { useEffect, useId, useRef, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useOutsideClick } from "@hooks/useOutSideClick";
+import { ArrowUpRight, Lock, X } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import { Reveal } from "@components/Section";
 import { cards } from "@data/ProjectsData";
-export function ProjectCards() {
-  const [active, setActive] = useState(null);
-  const id = useId();
-  const ref = useRef(null);
 
-  useEffect(() => {
-    function onKeyDown(event) {
-      if (event.key === "Escape") {
-        setActive(false);
-      }
-    }
+const URL_RE = /(https?:\/\/[^\s)]+)/g;
 
-    if (active && typeof active === "object") {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [active]);
-
-  useOutsideClick(ref, () => setActive(null));
-
-  return (
-    <>
-      <AnimatePresence>
-        {/* backdrop blur */}
-        {active && typeof active === "object" && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-gray-400/15 backdrop-blur-sm h-full w-full z-10"
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {active && typeof active === "object" ? (
-          <div className="fixed inset-0  grid place-items-center z-[100]">
-            {/* close button */}
-            <motion.button
-              key={`button-${active.title}-${id}`}
-              layout
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              exit={{
-                opacity: 0,
-                transition: {
-                  duration: 0.05,
-                },
-              }}
-              className="flex absolute top-2 right-2  items-center justify-center bg-white rounded-full h-6 w-6"
-              onClick={() => setActive(null)}
-            >
-              <CloseIcon />
-            </motion.button>
-            <motion.div
-              layoutId={`card-${active.title}-${id}`}
-              ref={ref}
-              className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%]  flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
-            >
-              {/* image of card */}
-              <motion.div layoutId={`image-${active.title}-${id}`}>
-                <img
-                  width={200}
-                  height={200}
-                  src={active.src}
-                  alt={active.title}
-                  className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover "
-                />
-              </motion.div>
-
-              <div>
-                <div className="flex justify-between items-start p-4">
-                  <div className="">
-                    <motion.h3
-                      layoutId={`title-${active.title}-${id}`}
-                      className="font-medium text-neutral-700 dark:text-neutral-200 text-base"
-                    >
-                      {active.title}
-                    </motion.h3>
-                    <motion.span
-                      layoutId={`description-${active.description}-${id}`}
-                      className="text-neutral-600 dark:text-neutral-400 text-base"
-                    >
-                      {active.description.map((item) => {
-                        return (
-                          <p
-                            key={item}
-                            className=" inline-block p-1 bg-gray-400 m-1 rounded-lg text-black "
-                          >
-                            {item}
-                          </p>
-                        );
-                      })}
-                    </motion.span>
-                  </div>
-
-                  <motion.a
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    href={
-                      active.ctaText === "Repo is Private"
-                        ? undefined
-                        : active.ctaLink
-                    }
-                    target={
-                      active.ctaText === "Repo is Private" ? "_self" : "_blank"
-                    }
-                    aria-disabled={active.ctaText === "Repo is Private"}
-                    className={`px-4 py-3 text-sm rounded-full font-bold text-white ${
-                      active.ctaText === "Repo is Private"
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-green-500"
-                    }`}
-                  >
-                    {active.ctaText}
-                  </motion.a>
-                </div>
-                <div className="pt-4 relative px-4">
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-neutral-600 text-sm md:text-base lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-y-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)]"
-                    style={{ scrollbarWidth: "thin" }} // For Firefox
-                  >
-                    {typeof active.content === "function"
-                      ? active.content()
-                      : active.content}
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        ) : null}
-      </AnimatePresence>
-      <ul className=" w-3/4 grid grid-cols-1 md:grid-cols-4 items-start gap-4">
-        {cards.map((card) => (
-          <motion.div
-            layoutId={`card-${card.title}-${id}`}
-            key={card.title}
-            onClick={() => setActive(card)}
-            className="p-4 flex flex-col  hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
-          >
-            <div className="flex gap-4 flex-col  w-full">
-              <motion.div layoutId={`image-${card.title}-${id}`}>
-                <img
-                  width={100}
-                  height={100}
-                  src={card.src}
-                  alt={card.title}
-                  className="h-60 w-full  rounded-lg object-cover object-top"
-                />
-              </motion.div>
-              <div className="flex justify-center items-center flex-col">
-                <motion.h3
-                  layoutId={`title-${card.title}-${id}`}
-                  className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left text-base"
-                >
-                  {card.title}
-                </motion.h3>
-                <motion.div className="text-neutral-600 dark:text-neutral-400 text-center md:text-left text-base">
-                  {card.description.map((item) => {
-                    return (
-                      <p
-                        key={item}
-                        className=" inline-block p-1 bg-gray-400 m-1 rounded-lg text-black "
-                      >
-                        {item}
-                      </p>
-                    );
-                  })}
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </ul>
-    </>
+// Turn plain URLs inside project descriptions into links
+function Linkify({ text }) {
+  return text.split(URL_RE).map((part, i) =>
+    i % 2 === 1 ? (
+      <a
+        key={i}
+        href={part}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-indigo-300 underline decoration-indigo-300/30 underline-offset-2 hover:decoration-indigo-300"
+      >
+        {part.replace(/^https?:\/\//, "")}
+      </a>
+    ) : (
+      <span key={i}>{part}</span>
+    )
   );
 }
 
-export const CloseIcon = () => {
+function TechList({ items, max }) {
+  const shown = max ? items.slice(0, max) : items;
+  const rest = items.length - shown.length;
   return (
-    <motion.svg
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      exit={{
-        opacity: 0,
-        transition: {
-          duration: 0.05,
-        },
-      }}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-4 w-4 text-black"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M18 6l-12 12" />
-      <path d="M6 6l12 12" />
-    </motion.svg>
+    <div className="flex flex-wrap gap-1.5">
+      {shown.map((t) => (
+        <span key={t} className="chip">
+          {t}
+        </span>
+      ))}
+      {rest > 0 && <span className="chip text-zinc-500">+{rest}</span>}
+    </div>
   );
-};
+}
+
+function ProjectLink({ project, className = "" }) {
+  if (project.isPrivate) {
+    return (
+      <span className={`btn-ghost cursor-not-allowed opacity-60 ${className}`}>
+        <Lock className="size-4" />
+        Private repository
+      </span>
+    );
+  }
+  return (
+    <a
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`btn-primary ${className}`}
+    >
+      <FaGithub className="size-4" />
+      View repository
+      <ArrowUpRight className="size-4" />
+    </a>
+  );
+}
+
+export function ProjectCards() {
+  const [active, setActive] = useState(null);
+
+  useEffect(() => {
+    if (!active) return;
+    const onKeyDown = (e) => e.key === "Escape" && setActive(null);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [active]);
+
+  return (
+    <>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {cards.map((card, i) => (
+          <Reveal key={card.title} delay={(i % 3) * 0.06}>
+            <button
+              type="button"
+              onClick={() => setActive(card)}
+              className="card group flex h-full w-full flex-col overflow-hidden text-left transition-transform duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+            >
+              <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-zinc-900">
+                <img
+                  src={card.src}
+                  alt={card.title}
+                  loading="lazy"
+                  className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 to-transparent" />
+              </div>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="font-semibold text-zinc-100">{card.title}</h3>
+                  <ArrowUpRight className="size-4 text-zinc-500 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+                </div>
+                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-zinc-400">
+                  {card.content}
+                </p>
+                <div className="mt-auto pt-5">
+                  <TechList items={card.tech} max={4} />
+                </div>
+              </div>
+            </button>
+          </Reveal>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            className="fixed inset-0 z-[100] grid place-items-center p-0 sm:p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div
+              className="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm"
+              onClick={() => setActive(null)}
+            />
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label={active.title}
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 24, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="relative flex h-full w-full max-w-2xl flex-col overflow-hidden border border-white/10 bg-zinc-900 sm:h-auto sm:max-h-[90vh] sm:rounded-2xl"
+            >
+              <button
+                aria-label="Close"
+                onClick={() => setActive(null)}
+                className="absolute right-3 top-3 z-10 grid size-9 place-items-center rounded-full bg-zinc-950/70 text-zinc-300 backdrop-blur transition hover:text-white"
+              >
+                <X className="size-4" />
+              </button>
+              <div className="overflow-y-auto">
+                <img
+                  src={active.src}
+                  alt={active.title}
+                  className="aspect-video w-full border-b border-white/10 object-cover object-top"
+                />
+                <div className="p-6 md:p-8">
+                  <h3 className="text-2xl font-semibold tracking-tight text-white">
+                    {active.title}
+                  </h3>
+                  <div className="mt-4">
+                    <TechList items={active.tech} />
+                  </div>
+                  <p className="mt-6 leading-relaxed text-zinc-300">
+                    <Linkify text={active.content} />
+                  </p>
+                  <div className="mt-8">
+                    <ProjectLink project={active} />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

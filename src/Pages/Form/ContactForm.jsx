@@ -1,20 +1,24 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { Mail, User, MessageSquare } from "lucide-react";
+import { Mail, User, MessageSquare, Send, ArrowUpRight } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Toaster } from "react-hot-toast";
 import { notify, loading, error } from "@utils/ToastFunction";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Section, Reveal } from "@components/Section";
+import { cn } from "@utils/utils";
+import { typeWriterJsonObject } from "@data/Data.json";
 
-// Add a strict email regex pattern here if needed.
-const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const { contactMe } = typeWriterJsonObject;
+
+const emailPattern = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const formFields = [
-  { id: "name", label: "Name", icon: User, type: "text" },
-  { id: "email", label: "Email", icon: Mail, type: "email" },
-  { id: "message", label: "Message", icon: MessageSquare, type: "textarea" },
+  { id: "name", label: "Name", icon: User, type: "text", placeholder: "Jane Doe" },
+  { id: "email", label: "Email", icon: Mail, type: "email", placeholder: "jane@company.com" },
+  { id: "message", label: "Message", icon: MessageSquare, type: "textarea", placeholder: "Tell me about your project or role..." },
 ];
 
 const schema = yup
@@ -28,6 +32,15 @@ const schema = yup
   })
   .required();
 
+const channels = [
+  { label: "Email", value: contactMe.email, href: `mailto:${contactMe.email}`, Icon: Mail },
+  { label: "LinkedIn", value: "syedalimurtaza1214", href: contactMe.linkedin, Icon: FaLinkedin },
+  { label: "GitHub", value: "JUPITER512", href: contactMe.github, Icon: FaGithub },
+];
+
+const inputBase =
+  "w-full rounded-xl border bg-zinc-950/60 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 outline-none transition focus:ring-4";
+
 const ContactMe = () => {
   const {
     register,
@@ -37,22 +50,18 @@ const ContactMe = () => {
     reset,
   } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
-  
-  const form = useRef(null);
+
   const [debouncedEmailError, setDebouncedEmailError] = useState("");
   const enteredEmail = watch("email");
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (enteredEmail && !emailPattern.test(enteredEmail)) {
-        setDebouncedEmailError("Invalid email format");
-      } else {
-        setDebouncedEmailError("");
-      }
+      setDebouncedEmailError(
+        enteredEmail && !emailPattern.test(enteredEmail) ? "Invalid email format" : ""
+      );
     }, 1000);
-
-    // Clear the timer if the user is still typing
     return () => clearTimeout(timer);
   }, [enteredEmail]);
 
@@ -68,9 +77,7 @@ const ContactMe = () => {
           from_email: data.email,
           message: data.message,
         },
-        {
-          publicKey: import.meta.env.VITE_PUBLIC_KEY,
-        }
+        { publicKey: import.meta.env.VITE_PUBLIC_KEY }
       );
       notify("Message sent successfully!");
       reset();
@@ -80,120 +87,99 @@ const ContactMe = () => {
     }
   };
 
+  const disabled = isSubmitting || !isValid || !isDirty;
+
   return (
-    <motion.div
-      className="min-h-screen dark:bg-black bg-white dark:bg-dot-white/[0.1] bg-dot-black/[0.2] py-10 px-4 md:px-6"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      id="contactme"
+    <Section
+      id="contact"
+      eyebrow="Contact"
+      title="Let's build something together."
+      subtitle="Have a project, a role, or just want to say hi? My inbox is always open and I'll get back to you as soon as I can."
     >
       <Toaster />
-      <motion.h3
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-600 dark:to-white"
-      >
-        Contact Me
-      </motion.h3>
-
-      <div className="flex items-center justify-center flex-col md:flex-row gap-8 w-full max-w-7xl mx-auto">
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-center space-y-4"
-        >
-          <div className="text-lg dark:text-gray-300 space-y-2">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 justify-center"
+      <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr] lg:gap-12">
+        <Reveal className="flex flex-col gap-3">
+          {channels.map(({ label, value, href, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("mailto:") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              className="card group flex items-center gap-4 p-4"
             >
-              <Mail className="w-5 h-5" />
-              <span>Email me at</span>
-            </motion.div>
-            <motion.a
-              href="mailto:syedalimurtaza36@gmail.com"
-              className="font-bold block hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
-              whileHover={{ scale: 1.05 }}
-            >
-              syedalimurtaza36@gmail.com
-            </motion.a>
-          </div>
-        </motion.div>
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-300 group-hover:text-white">
+                <Icon className="size-5" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-xs text-zinc-500">{label}</span>
+                <span className="block truncate text-sm font-medium text-zinc-200">{value}</span>
+              </span>
+              <ArrowUpRight className="size-4 text-zinc-500 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+            </a>
+          ))}
+        </Reveal>
 
-        <motion.div
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="w-full max-w-lg"
-        >
+        <Reveal delay={0.1}>
           <form
-            ref={form}
             onSubmit={handleSubmit(sendEmail)}
-            className="bg-white dark:bg-gray-800/50 backdrop-blur-lg p-8 rounded-2xl shadow-xl dark:shadow-2xl space-y-6"
+            noValidate
+            className="card space-y-5 p-6 hover:border-white/10 md:p-8"
           >
-            <AnimatePresence mode="wait">
-              {formFields.map(({ id, label, icon: Icon, type }) => (
-                <motion.div
-                  key={id}
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: 20, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-2"
-                >
-                  <motion.label
-                    htmlFor={id}
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Icon className="w-4 h-4" />
-                      {label}
-                    </div>
-                  </motion.label>
-
+            {formFields.map(({ id, label, icon: Icon, type, placeholder }) => {
+              const message = errors[id]?.message || (id === "email" && debouncedEmailError);
+              const fieldClass = cn(
+                inputBase,
+                message
+                  ? "border-red-500/50 focus:border-red-500/60 focus:ring-red-500/10"
+                  : "border-white/10 focus:border-indigo-400/60 focus:ring-indigo-500/10"
+              );
+              return (
+                <div key={id} className="space-y-2">
+                  <label htmlFor={id} className="flex items-center gap-2 text-sm font-medium text-zinc-300">
+                    <Icon className="size-4 text-zinc-500" />
+                    {label}
+                  </label>
                   {type === "textarea" ? (
                     <textarea
                       {...register(id)}
                       id={id}
-                      className={`min-h-[100px] resize-none shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400`}
-                      placeholder={`Enter your ${label.toLowerCase()}`}
+                      rows={5}
+                      placeholder={placeholder}
+                      aria-invalid={!!message}
+                      className={cn(fieldClass, "resize-none")}
                     />
                   ) : (
                     <input
                       {...register(id)}
-                      type={type}
                       id={id}
-                      placeholder={`Enter your ${label.toLowerCase()}`}
-                      className="shadow border border-gray-300 dark:border-gray-700 rounded w-full py-3 px-4 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 transition-all duration-300 placeholder-gray-400"
+                      type={type}
+                      placeholder={placeholder}
+                      aria-invalid={!!message}
+                      className={fieldClass}
                     />
                   )}
-                  {(errors[id] || (id === "email" && debouncedEmailError)) && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors[id]?.message || debouncedEmailError}
-                    </p>
-                  )}
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                  {message && <p className="text-xs text-red-400">{message}</p>}
+                </div>
+              );
+            })}
+
             <button
               type="submit"
-              disabled={isSubmitting || !isValid || !isDirty}
-              className={`w-full rounded ${
-                isSubmitting || !isValid || !isDirty
-                  ? "bg-indigo-300 cursor-not-allowed"
-                  : "bg-indigo-500 hover:bg-indigo-600 transition duration-300 transform hover:scale-105 cursor-pointer"
-              } text-white font-bold py-3 px-5`}
+              disabled={disabled}
+              className={cn(
+                "btn w-full !rounded-xl !py-3",
+                disabled
+                  ? "cursor-not-allowed bg-white/10 text-zinc-500"
+                  : "bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-500/20 hover:brightness-110"
+              )}
             >
-              {isSubmitting ? "Sending..." : "Send Message"}
+              <Send className="size-4" />
+              {isSubmitting ? "Sending..." : "Send message"}
             </button>
           </form>
-        </motion.div>
+        </Reveal>
       </div>
-    </motion.div>
+    </Section>
   );
 };
 

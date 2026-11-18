@@ -1,6 +1,7 @@
 {
   "name": "Syed Ali Murtaza",
   "jobTitle": "Software Engineer",
+  "tagline": "I build robust, data-driven web applications with the MERN stack, from APIs and automation pipelines to polished, responsive interfaces.",
   "descriptionAboutYourSelf": "Innovative and detail-oriented Software Engineer with hands-on experience in full-stack development and a strong enthusiasm for Data Science. Skilled in building robust, data-driven applications using modern technologies, I specialize in the MERN stack, API integration, and web automation. With experience in handling large-scale data processing and building data-heavy web applications, I am passionate about leveraging AI/ML, big data analytics, and data engineering techniques to solve real-world problems and enhance user experiences.",
   "typeWriterJsonObject": {
     "name": "Ali Murtaza",
@@ -16,7 +17,10 @@
   "contentData": {
     "systemsLimited": {
       "description": "Worked as a Software Engineer Intern at Systems Limited, where I learned backend development using Node.js and built two full-stack projects:",
-      "projects": ["CRM", "ExpenseQL"],
+      "projects": [
+        "CRM",
+        "ExpenseQL"
+      ],
       "images": [
         {
           "src": "./systems.jpeg",
@@ -30,7 +34,11 @@
           "width": 500,
           "height": 500
         }
-      ]
+      ],
+      "company": "Systems Limited",
+      "role": "Software Engineer Intern",
+      "period": "Aug 2024 – Nov 2024",
+      "logo": "./systems.jpeg"
     },
     "upwork": {
       "description": "During this tenure, I worked as a freelancer on Upwork, where I developed web automation solutions and Discord bots using Python, Selenium, and Pycord. Additionally, I successfully built a dashboard with API integration. I also designed and implemented robust web data mining scripts, efficiently managing and processing thousands of data points to extract valuable insights and automate complex workflows.",
@@ -47,7 +55,11 @@
           "width": 500,
           "height": 500
         }
-      ]
+      ],
+      "company": "Upwork",
+      "role": "Freelance Software Developer",
+      "period": "Mar 2024 – Jul 2024",
+      "logo": "./upworkLogo.webp"
     },
     "bitbash": {
       "description": "I began my journey as a Software Engineer at Bitbash, where I gained experience in Python, JavaScript, Selenium, React, and API integration. I also worked extensively with data handling, processing large datasets, and extracting meaningful insights to improve automation workflows and application efficiency.",
@@ -73,7 +85,11 @@
           "width": 500,
           "height": 500
         }
-      ]
+      ],
+      "company": "Bitbash",
+      "role": "Software Engineer",
+      "period": "Aug 2023 – Feb 2024",
+      "logo": "./Bitbash.png"
     }
   },
   "project_cards": [

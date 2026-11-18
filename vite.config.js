@@ -13,8 +13,8 @@ export default defineConfig({
         name: 'Syed Ali Murtaza Portfolio',
         short_name: 'Ali\'s Portfolio',
         description: 'A showcase of my skills, experience, and projects.',
-        theme_color: '#222831',
-        background_color: '#EEEEEE',
+        theme_color: '#09090b',
+        background_color: '#09090b',
         display: 'standalone',
         start_url: '/',
         icons: [

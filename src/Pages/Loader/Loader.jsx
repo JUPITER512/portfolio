@@ -1,44 +1,28 @@
-// @pages/Loader/Loader.js
-
-import { motion } from 'framer-motion';
-import './Loader.css'; // Import your CSS for the loader
+import { motion } from "framer-motion";
 
 const Loader = () => {
   return (
-    <div className="loader-container">
-      <motion.div
-        className="loader"
-        initial={{ scale: 0.5 }}
-        animate={{ scale: [1, 0.8, 1] }}
-        transition={{ duration: 0.6, repeat: Infinity }}
-      >
-        <motion.div
-          className="dot"
-          initial={{ y: 0 }}
-          animate={{ y: [-10, 0, -10] }}
-          transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
-        />
-        <motion.div
-          className="dot"
-          initial={{ y: 0 }}
-          animate={{ y: [-10, 0, -10] }}
-          transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
-        />
-        <motion.div
-          className="dot"
-          initial={{ y: 0 }}
-          animate={{ y: [-10, 0, -10] }}
-          transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
-        />
-      </motion.div>
-      <motion.p
-        className="loading-text"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}
-      >
-        Loading...
-      </motion.p>
+    <div className="grid h-[100svh] place-items-center bg-zinc-950">
+      <div className="flex flex-col items-center gap-5">
+        <motion.span
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="grid size-14 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-400 font-mono text-lg font-bold text-zinc-950"
+        >
+          AM
+        </motion.span>
+        <div className="flex gap-1.5">
+          {[0, 1, 2].map((i) => (
+            <motion.span
+              key={i}
+              className="size-1.5 rounded-full bg-zinc-500"
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 1, repeat: Infinity, delay: i * 0.15 }}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
